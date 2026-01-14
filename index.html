@@ -1,9 +1,307 @@
-<html> 
-<head>
-  <title>latihan ivey html</title>
-</head>
-  <body>
-    <h4> ini judul artikel ivey</h4>
-    <p> ini paragraf awal halaman html yang diketik ivey</p>
-  </body>
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Berita Hari Ini</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap');
+    
+    :root {
+      --background: #0a0e1a;
+      --surface: #1a1f35;
+      --text: #e8eaf0;
+      --primary: #ff6b35;
+      --secondary: #4a90e2;
+    }
+    
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .news-card {
+      background: var(--surface);
+      border-left: 4px solid var(--primary);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .news-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(255, 107, 53, 0.2);
+    }
+    
+    .headline-card {
+      background: linear-gradient(135deg, var(--surface) 0%, #252b47 100%);
+      border: 2px solid var(--primary);
+    }
+    
+    .date-badge {
+      background: var(--primary);
+      color: var(--background);
+      font-weight: 600;
+      display: inline-block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+    
+    .breaking-banner {
+      background: var(--primary);
+      color: var(--background);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: slideIn 0.5s ease-out;
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    .category-badge {
+      background: var(--secondary);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div class="h-full w-full overflow-auto" style="background: var(--background); color: var(--text);"><!-- Header -->
+   <header class="border-b" style="border-color: var(--surface);">
+    <div class="max-w-6xl mx-auto px-6 py-6">
+     <div class="flex items-center justify-between">
+      <div>
+       <h1 id="site-title" class="text-4xl font-black mb-1" style="font-family: 'Playfair Display', serif; color: var(--primary);">Berita Hari Ini</h1>
+       <p id="tagline" class="text-sm" style="color: var(--text); opacity: 0.7; font-family: 'Inter', sans-serif;">Informasi Terkini dan Terpercaya</p>
+      </div>
+      <div class="date-badge px-4 py-2 rounded-full text-sm" id="current-date"></div>
+     </div>
+    </div>
+   </header><!-- Breaking News Banner -->
+   <div class="breaking-banner py-3 px-6">
+    <div class="max-w-6xl mx-auto flex items-center gap-3"><span class="text-sm">🔴 BREAKING</span> <span id="breaking-text" class="text-sm" style="font-family: 'Inter', sans-serif;">Berita terbaru sedang berkembang...</span>
+    </div>
+   </div><!-- Main Content -->
+   <main class="max-w-6xl mx-auto px-6 py-8"><!-- Headline -->
+    <article class="headline-card rounded-xl p-8 mb-8 cursor-pointer hover:shadow-2xl transition-all duration-300">
+     <div class="flex items-center gap-3 mb-4"><span class="category-badge px-3 py-1 rounded-full">Utama</span> <span class="text-sm" style="opacity: 0.6; font-family: 'Inter', sans-serif;">📍 Jakarta</span>
+     </div>
+     <h2 id="headline-title" class="text-3xl font-black mb-4" style="font-family: 'Playfair Display', serif; line-height: 1.2;">Pemerintah Umumkan Kebijakan Ekonomi Baru untuk Meningkatkan Kesejahteraan Masyarakat</h2>
+     <p id="headline-excerpt" class="text-lg leading-relaxed" style="opacity: 0.9; font-family: 'Inter', sans-serif;">Menteri Keuangan mengumumkan serangkaian kebijakan baru yang bertujuan untuk memperkuat ekonomi nasional dan meningkatkan daya beli masyarakat di tengah tantangan ekonomi global.</p>
+     <div class="mt-6 flex items-center gap-4"><span class="text-sm" style="opacity: 0.5; font-family: 'Inter', sans-serif;">⏰ 2 jam yang lalu</span> <button class="text-sm font-semibold hover:underline" style="color: var(--primary); font-family: 'Inter', sans-serif;">Baca Selengkapnya →</button>
+     </div>
+    </article><!-- News Grid -->
+    <div class="news-grid"><!-- News Card 1 -->
+     <article class="news-card rounded-lg p-6">
+      <div class="flex items-center gap-2 mb-3"><span class="category-badge px-2 py-1 rounded">Teknologi</span>
+      </div>
+      <h3 id="news1-title" class="text-xl font-bold mb-3" style="font-family: 'Playfair Display', serif;">Inovasi AI Terbaru Diluncurkan oleh Startup Lokal</h3>
+      <p id="news1-excerpt" class="text-sm leading-relaxed mb-4" style="opacity: 0.8; font-family: 'Inter', sans-serif;">Sebuah startup teknologi Indonesia berhasil meluncurkan platform kecerdasan buatan yang dapat membantu bisnis kecil meningkatkan efisiensi operasional mereka.</p>
+      <div class="flex items-center justify-between"><span class="text-xs" style="opacity: 0.5; font-family: 'Inter', sans-serif;">⏰ 4 jam lalu</span> <button class="text-xs font-semibold hover:underline" style="color: var(--primary); font-family: 'Inter', sans-serif;">Selengkapnya →</button>
+      </div>
+     </article><!-- News Card 2 -->
+     <article class="news-card rounded-lg p-6">
+      <div class="flex items-center gap-2 mb-3"><span class="category-badge px-2 py-1 rounded">Olahraga</span>
+      </div>
+      <h3 id="news2-title" class="text-xl font-bold mb-3" style="font-family: 'Playfair Display', serif;">Tim Nasional Raih Kemenangan Gemilang di Turnamen Asia</h3>
+      <p id="news2-excerpt" class="text-sm leading-relaxed mb-4" style="opacity: 0.8; font-family: 'Inter', sans-serif;">Prestasi membanggakan ditorehkan tim nasional sepak bola Indonesia setelah mengalahkan juara bertahan dengan skor 3-1 di babak semifinal turnamen regional.</p>
+      <div class="flex items-center justify-between"><span class="text-xs" style="opacity: 0.5; font-family: 'Inter', sans-serif;">⏰ 5 jam lalu</span> <button class="text-xs font-semibold hover:underline" style="color: var(--primary); font-family: 'Inter', sans-serif;">Selengkapnya →</button>
+      </div>
+     </article><!-- News Card 3 -->
+     <article class="news-card rounded-lg p-6">
+      <div class="flex items-center gap-2 mb-3"><span class="category-badge px-2 py-1 rounded">Kesehatan</span>
+      </div>
+      <h3 id="news3-title" class="text-xl font-bold mb-3" style="font-family: 'Playfair Display', serif;">Program Vaksinasi Gratis Diperluas ke Seluruh Provinsi</h3>
+      <p id="news3-excerpt" class="text-sm leading-relaxed mb-4" style="opacity: 0.8; font-family: 'Inter', sans-serif;">Kementerian Kesehatan mengumumkan perluasan program vaksinasi gratis untuk mencakup semua kelompok usia di seluruh provinsi Indonesia mulai bulan depan.</p>
+      <div class="flex items-center justify-between"><span class="text-xs" style="opacity: 0.5; font-family: 'Inter', sans-serif;">⏰ 6 jam lalu</span> <button class="text-xs font-semibold hover:underline" style="color: var(--primary); font-family: 'Inter', sans-serif;">Selengkapnya →</button>
+      </div>
+     </article>
+    </div>
+   </main><!-- Footer -->
+   <footer class="border-t mt-12 py-6" style="border-color: var(--surface);">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+     <p id="footer-text" class="text-sm" style="opacity: 0.5; font-family: 'Inter', sans-serif;">© 2024 Berita Hari Ini. Semua hak dilindungi.</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      background_color: '#0a0e1a',
+      surface_color: '#1a1f35',
+      text_color: '#e8eaf0',
+      primary_color: '#ff6b35',
+      secondary_color: '#4a90e2',
+      font_family: 'Playfair Display',
+      font_size: 16,
+      site_title: 'Berita Hari Ini',
+      tagline: 'Informasi Terkini dan Terpercaya',
+      headline_title: 'Pemerintah Umumkan Kebijakan Ekonomi Baru untuk Meningkatkan Kesejahteraan Masyarakat',
+      headline_excerpt: 'Menteri Keuangan mengumumkan serangkaian kebijakan baru yang bertujuan untuk memperkuat ekonomi nasional dan meningkatkan daya beli masyarakat di tengah tantangan ekonomi global.',
+      news1_title: 'Inovasi AI Terbaru Diluncurkan oleh Startup Lokal',
+      news1_excerpt: 'Sebuah startup teknologi Indonesia berhasil meluncurkan platform kecerdasan buatan yang dapat membantu bisnis kecil meningkatkan efisiensi operasional mereka.',
+      news2_title: 'Tim Nasional Raih Kemenangan Gemilang di Turnamen Asia',
+      news2_excerpt: 'Prestasi membanggakan ditorehkan tim nasional sepak bola Indonesia setelah mengalahkan juara bertahan dengan skor 3-1 di babak semifinal turnamen regional.',
+      news3_title: 'Program Vaksinasi Gratis Diperluas ke Seluruh Provinsi',
+      news3_excerpt: 'Kementerian Kesehatan mengumumkan perluasan program vaksinasi gratis untuk mencakup semua kelompok usia di seluruh provinsi Indonesia mulai bulan depan.',
+      footer_text: '© 2024 Berita Hari Ini. Semua hak dilindungi.'
+    };
+
+    async function onConfigChange(config) {
+      const root = document.documentElement;
+      const baseSize = config.font_size || defaultConfig.font_size;
+      const customFont = config.font_family || defaultConfig.font_family;
+      
+      root.style.setProperty('--background', config.background_color || defaultConfig.background_color);
+      root.style.setProperty('--surface', config.surface_color || defaultConfig.surface_color);
+      root.style.setProperty('--text', config.text_color || defaultConfig.text_color);
+      root.style.setProperty('--primary', config.primary_color || defaultConfig.primary_color);
+      root.style.setProperty('--secondary', config.secondary_color || defaultConfig.secondary_color);
+      
+      document.getElementById('site-title').textContent = config.site_title || defaultConfig.site_title;
+      document.getElementById('site-title').style.fontFamily = `${customFont}, serif`;
+      document.getElementById('site-title').style.fontSize = `${baseSize * 2}px`;
+      
+      document.getElementById('tagline').textContent = config.tagline || defaultConfig.tagline;
+      document.getElementById('tagline').style.fontSize = `${baseSize * 0.875}px`;
+      
+      document.getElementById('headline-title').textContent = config.headline_title || defaultConfig.headline_title;
+      document.getElementById('headline-title').style.fontFamily = `${customFont}, serif`;
+      document.getElementById('headline-title').style.fontSize = `${baseSize * 1.875}px`;
+      
+      document.getElementById('headline-excerpt').textContent = config.headline_excerpt || defaultConfig.headline_excerpt;
+      document.getElementById('headline-excerpt').style.fontSize = `${baseSize * 1.125}px`;
+      
+      document.getElementById('news1-title').textContent = config.news1_title || defaultConfig.news1_title;
+      document.getElementById('news1-title').style.fontFamily = `${customFont}, serif`;
+      document.getElementById('news1-title').style.fontSize = `${baseSize * 1.25}px`;
+      
+      document.getElementById('news1-excerpt').textContent = config.news1_excerpt || defaultConfig.news1_excerpt;
+      document.getElementById('news1-excerpt').style.fontSize = `${baseSize * 0.875}px`;
+      
+      document.getElementById('news2-title').textContent = config.news2_title || defaultConfig.news2_title;
+      document.getElementById('news2-title').style.fontFamily = `${customFont}, serif`;
+      document.getElementById('news2-title').style.fontSize = `${baseSize * 1.25}px`;
+      
+      document.getElementById('news2-excerpt').textContent = config.news2_excerpt || defaultConfig.news2_excerpt;
+      document.getElementById('news2-excerpt').style.fontSize = `${baseSize * 0.875}px`;
+      
+      document.getElementById('news3-title').textContent = config.news3_title || defaultConfig.news3_title;
+      document.getElementById('news3-title').style.fontFamily = `${customFont}, serif`;
+      document.getElementById('news3-title').style.fontSize = `${baseSize * 1.25}px`;
+      
+      document.getElementById('news3-excerpt').textContent = config.news3_excerpt || defaultConfig.news3_excerpt;
+      document.getElementById('news3-excerpt').style.fontSize = `${baseSize * 0.875}px`;
+      
+      document.getElementById('footer-text').textContent = config.footer_text || defaultConfig.footer_text;
+      document.getElementById('footer-text').style.fontSize = `${baseSize * 0.875}px`;
+    }
+
+    function updateDate() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const dateString = now.toLocaleDateString('id-ID', options);
+      document.getElementById('current-date').textContent = dateString;
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                config.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_color || defaultConfig.secondary_color,
+              set: (value) => {
+                config.secondary_color = value;
+                window.elementSdk.setConfig({ secondary_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['site_title', config.site_title || defaultConfig.site_title],
+          ['tagline', config.tagline || defaultConfig.tagline],
+          ['headline_title', config.headline_title || defaultConfig.headline_title],
+          ['headline_excerpt', config.headline_excerpt || defaultConfig.headline_excerpt],
+          ['news1_title', config.news1_title || defaultConfig.news1_title],
+          ['news1_excerpt', config.news1_excerpt || defaultConfig.news1_excerpt],
+          ['news2_title', config.news2_title || defaultConfig.news2_title],
+          ['news2_excerpt', config.news2_excerpt || defaultConfig.news2_excerpt],
+          ['news3_title', config.news3_title || defaultConfig.news3_title],
+          ['news3_excerpt', config.news3_excerpt || defaultConfig.news3_excerpt],
+          ['footer_text', config.footer_text || defaultConfig.footer_text]
+        ])
+      });
+    }
+
+    updateDate();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bdc7315851c7d50',t:'MTc2ODM4NjUzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
